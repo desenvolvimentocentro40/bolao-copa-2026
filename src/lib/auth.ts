@@ -8,7 +8,7 @@ interface JWTPayload {
   nome: string;
   email: string;
   setor: string;
-  tipo: 'admin' | 'colaborador' | 'ia';
+  tipo: 'admin' | 'user' | 'ia';
 }
 
 // Criptografa a senha para salvar no banco (Útil para a tela de cadastro)
