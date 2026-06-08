@@ -27,7 +27,7 @@ export async function registerAction(formData: FormData) {
     // 3. Insere o novo usuário
     await query(
       'INSERT INTO usuarios (nome, email, senha_hash, setor, tipo) VALUES (?, ?, ?, ?, ?)',
-      [nome, email, senhaHash, setor, 'colaborador']
+      [nome, email, senhaHash, setor, 'user']
     );
 
     // 4. Dispara o e-mail de forma assíncrona (sem travar o retorno para o usuário)
