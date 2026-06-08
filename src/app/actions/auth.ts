@@ -49,7 +49,7 @@ export async function loginAction(formData: FormData) {
     });
 
     // 4. Salva o token em um cookie HTTP-Only seguro
-    const cookieStore = await cookies();
+    //const cookieStore = await cookies();
     // cookieStore.set('auth_token', token, {
     //   httpOnly: true,
     //   secure: process.env.NODE_ENV === 'production',
@@ -57,9 +57,12 @@ export async function loginAction(formData: FormData) {
     //   maxAge: 60 * 60 * 24 * 7, // 7 dias
     //   path: '/',
     // });
-    cookieStore.set('bolao_token', token, {
+    
+    // 4. Salva o token em um cookie HTTP-Only seguro
+    const cookieStore = await cookies();
+    cookieStore.set('auth_token', token, { // <-- VOLTAMOS PARA auth_token
       httpOnly: true,
-      secure: false, // <-- A MÁGICA: Permite HTTP
+      secure: false, // Permite HTTP local e na VPS temporariamente
       path: '/',
       maxAge: 60 * 60 * 24
     });
