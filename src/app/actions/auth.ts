@@ -12,7 +12,7 @@ interface UserRow {
   email: string;
   senha_hash: string;
   setor: string;
-  tipo: 'admin' | 'colaborador' | 'ia';
+  tipo: 'admin' | 'user' | 'ia';
 }
 
 export async function loginAction(formData: FormData) {
@@ -50,12 +50,18 @@ export async function loginAction(formData: FormData) {
 
     // 4. Salva o token em um cookie HTTP-Only seguro
     const cookieStore = await cookies();
-    cookieStore.set('auth_token', token, {
+    // cookieStore.set('auth_token', token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === 'production',
+    //   sameSite: 'strict',
+    //   maxAge: 60 * 60 * 24 * 7, // 7 dias
+    //   path: '/',
+    // });
+    cookieStore.set('bolao_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 7, // 7 dias
+      secure: false, // <-- A MÁGICA: Permite HTTP
       path: '/',
+      maxAge: 60 * 60 * 24
     });
 
     return { success: true, message: 'Login realizado com sucesso!' };
