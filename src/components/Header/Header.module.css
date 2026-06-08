@@ -1,0 +1,89 @@
+.header {
+    background-color: var(--senai-dark);
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--copa-purple);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+  
+  .logoText {
+    color: var(--surface);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  
+  .highlight {
+    color: var(--copa-green);
+  }
+  
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .navLink {
+    color: #a0aec0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+    padding: 0.5rem 0;
+  }
+  
+  .navLink:hover {
+    color: var(--surface);
+  }
+  
+  /* Classe para quando o link for a página atual */
+  .active {
+    color: var(--copa-green);
+    border-bottom: 2px solid var(--copa-green);
+  }
+  
+  .logoutBtn {
+    background: transparent;
+    border: 1px solid var(--senai-red);
+    color: var(--senai-red);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 1rem;
+  }
+  
+  .logoutBtn:hover {
+    background-color: var(--senai-red);
+    color: var(--surface);
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      height: auto;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    
+    .nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .logoutBtn {
+      margin-left: 0;
+    }
+  }

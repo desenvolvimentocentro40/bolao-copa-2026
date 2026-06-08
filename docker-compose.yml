@@ -1,0 +1,44 @@
+services:
+  # 1. O nosso Banco de Dados MySQL
+  db:
+    image: mysql:8.0
+    container_name: bolao_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: senai_root_password
+      MYSQL_DATABASE: bolao_copa_2026
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # 2. A nossa Aplicação Next.js
+  app:
+    build: .
+    container_name: bolao_app
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=senai_root_password
+      - DB_NAME=bolao_copa_2026
+      - JWT_SECRET=chave_super_secreta_bolao_senai_4_0
+    depends_on:
+      - db
+
+  # 3. O Gerenciador de Banco de Dados (Adminer)
+  adminer:
+    image: adminer
+    container_name: bolao_adminer
+    restart: always
+    ports:
+      - "8081:8080" # Acesse via http://localhost:8080
+    environment:
+      - ADMINER_DEFAULT_SERVER=db # Já preenche o servidor automaticamente
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

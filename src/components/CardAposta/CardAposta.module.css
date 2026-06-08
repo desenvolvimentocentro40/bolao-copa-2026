@@ -1,0 +1,169 @@
+.card {
+    background-color: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    border-bottom: 1px solid var(--background);
+    padding-bottom: 0.5rem;
+  }
+  
+  .fase {
+    background-color: var(--background);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .matchografia {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.5rem 0;
+  }
+  
+  .timeBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 35px;
+    object-fit: contain;
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));
+  }
+  
+  .nomeTime {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--senai-dark);
+    text-align: center;
+  }
+  
+  .placarWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .inputPlacar {
+    width: 50px;
+    height: 45px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    color: var(--senai-dark);
+    background-color: var(--background);
+  }
+  
+  .inputPlacar:focus {
+    border-color: var(--copa-purple);
+    background-color: #fff;
+  }
+  
+  .inputPlacar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .vs {
+    font-weight: 800;
+    color: #a0aec0;
+    font-size: 0.9rem;
+  }
+  
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .btnSalvar {
+    background-color: var(--senai-blue);
+    color: var(--surface);
+    border: none;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+  }
+  
+  .btnSalvar:hover:not(:disabled) {
+    background-color: var(--senai-dark);
+  }
+  
+  .btnSalvar:disabled {
+    background-color: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
+  
+  .feedback {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .error { color: var(--senai-red); }
+  .success { color: #059669; }
+
+  /* Adicionar ao final do seu CardAposta.module.css */
+
+.btnIA {
+  background-color: transparent;
+  color: var(--copa-purple);
+  border: 1px dashed var(--copa-purple);
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.btnIA:hover:not(:disabled) {
+  background-color: rgba(94, 23, 235, 0.05);
+  border-style: solid;
+}
+
+.btnIA:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}

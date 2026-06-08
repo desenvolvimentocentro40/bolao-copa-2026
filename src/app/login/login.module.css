@@ -1,0 +1,125 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--senai-dark) 0%, var(--copa-purple) 100%);
+  padding: 1rem;
+}
+
+.loginCard {
+  background-color: var(--surface);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.title {
+  color: var(--senai-blue);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--senai-dark);
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--copa-purple);
+  box-shadow: 0 0 0 3px rgba(94, 23, 235, 0.1);
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.75rem;
+}
+
+.btnEntrar {
+  background-color: var(--copa-green);
+  color: var(--senai-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.btnEntrar:hover:not(:disabled) {
+  background-color: #00e077;
+  transform: translateY(-2px);
+}
+
+.btnEntrar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btnCadastrar {
+  background-color: transparent;
+  color: var(--copa-purple);
+  border: 2px solid var(--copa-purple);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnCadastrar:hover:not(:disabled) {
+  background-color: var(--copa-purple);
+  color: var(--surface);
+  transform: translateY(-2px);
+}
+
+.btnCadastrar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: var(--senai-red);
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}

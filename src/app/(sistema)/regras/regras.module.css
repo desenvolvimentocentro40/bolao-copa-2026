@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .title {
+    color: var(--senai-blue);
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .ruleCard {
+    background-color: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  }
+  
+  .badgePoints {
+    font-size: 1.8rem;
+    font-weight: 800;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  /* Cores dos cards baseadas na nossa Server Action de pontuação */
+  .pts5 { background-color: #d1fae5; color: #065f46; }
+  .pts3 { background-color: #e0f2fe; color: #0369a1; }
+  .pts1 { background-color: #fef3c7; color: #b45309; }
+  .pts0 { background-color: #f1f5f9; color: #64748b; }
+  
+  .ruleTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--senai-dark);
+    margin-bottom: 0.5rem;
+  }
+  
+  .ruleDescription {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  
+  .infoSection {
+    background-color: #f8fafc;
+    border-left: 4px solid var(--senai-blue);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .infoTitle {
+    font-size: 1.1rem;
+    color: var(--senai-dark);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .infoList {
+    margin-left: 1.25rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }

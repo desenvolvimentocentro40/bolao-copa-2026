@@ -1,0 +1,36 @@
+/* src/app/(sistema)/apostas/apostas.module.css */
+
+.pageTitle {
+  color: var(--senai-blue);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.pageSubtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.section {
+  margin-bottom: 3.5rem;
+}
+
+.faseTitle {
+  font-size: 1.4rem;
+  color: var(--senai-dark);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--copa-purple);
+  display: inline-block;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  /* Cria colunas responsivas que se adaptam ao tamanho da tela */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}

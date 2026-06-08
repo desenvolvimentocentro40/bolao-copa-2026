@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .welcomeCard {
+    background: linear-gradient(135deg, var(--senai-blue) 0%, var(--copa-purple) 100%);
+    color: var(--surface);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .welcomeCard h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .welcomeCard p {
+    opacity: 0.9;
+    font-size: 1.1rem;
+  }
+  
+  .leaderboardSection {
+    background-color: var(--surface);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+  }
+  
+  .sectionTitle {
+    color: var(--senai-dark);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .tableWrapper {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .table th {
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+  
+  .table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+  
+  .row:hover {
+    background-color: rgba(94, 23, 235, 0.02);
+  }
+  
+  /* Destaques do Pódio */
+  .posicao {
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--background);
+  }
+  
+  .primeiro { background-color: #ffd700; color: #000; }
+  .segundo { background-color: #c0c0c0; color: #000; }
+  .terceiro { background-color: #cd7f32; color: #fff; }
+  
+  .nomeUsuario {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .iaBadge {
+    background-color: var(--copa-green);
+    color: var(--senai-dark);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+  
+  .setorBadge {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .pontos {
+    font-weight: 700;
+    color: var(--copa-purple);
+    font-size: 1.1rem;
+  }
