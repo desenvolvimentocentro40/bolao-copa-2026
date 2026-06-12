@@ -32,12 +32,17 @@ export function CardAposta({
   const [loadingIA, setLoadingIA] = useState(false);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // Cálculos de data e hora (Subtraindo 10 minutos)
-  const dataJogo = new Date(dataHora);
+  // 1. Corrige o fuso horário removendo o 'Z' (UTC) para forçar o horário exato salvo no banco
+  const dataHoraCorrigida = typeof dataHora === 'string' && dataHora.endsWith('Z') 
+    ? dataHora.slice(0, -1) 
+    : dataHora;
+
+  // 2. Cálculos de data e hora (Subtraindo 10 minutos)
+  const dataJogo = new Date(dataHoraCorrigida);
   const dataEncerramento = new Date(dataJogo.getTime() - 10 * 60 * 1000);
   const encerrado = status !== 'agendado' || new Date() >= dataEncerramento;
 
-  // Formatação para exibir na tela
+  // 3. Formatação para exibir na tela (padrão Brasil)
   const formatadorHora = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' });
   const dataLocalStr = dataJogo.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
 

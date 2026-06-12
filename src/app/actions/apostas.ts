@@ -30,11 +30,12 @@ export async function salvarPalpiteAction(jogoId: number, palpiteCasa: number, p
     // Subtrai exatamente 10 minutos (10 * 60 * 1000 milissegundos) da hora oficial do jogo
     const dataLimite = new Date(jogo.data_hora.getTime() - 10 * 60 * 1000);
 
+    // 3. A Guilhotina: Bloqueia a gravação se passou do tempo ou se o jogo não estiver 'agendado'
     if (agora >= dataLimite || jogo.status !== 'agendado') {
       return { success: false, message: 'Tempo esgotado! As apostas encerram 10 minutos antes do jogo.' };
     }
 
-    // 3. Salvar ou atualizar o palpite usando a restrição UNIQUE do MySQL
+    // 4. Salvar ou atualizar o palpite usando a restrição UNIQUE do MySQL
     const sql = `
       INSERT INTO apostas (usuario_id, jogo_id, palpite_casa, palpite_visitante)
       VALUES (?, ?, ?, ?)
