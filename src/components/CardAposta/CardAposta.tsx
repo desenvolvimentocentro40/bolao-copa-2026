@@ -32,14 +32,13 @@ export function CardAposta({
   const [loadingIA, setLoadingIA] = useState(false);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // 1. O JavaScript puro já entende o formato que vem do banco graças à nossa config do Docker!
   const dataJogo = new Date(dataHora);
   
-  // 2. Cálculos de data e hora (Subtraindo 10 minutos para a guilhotina)
+  // Cálculos de data e hora (Subtraindo 10 minutos para a guilhotina)
   const dataEncerramento = new Date(dataJogo.getTime() - 10 * 60 * 1000);
   const encerrado = status !== 'agendado' || new Date() >= dataEncerramento;
 
-  // 3. Formatação para exibir na tela (padrão Brasil)
+  // Formatação para exibir na tela (padrão Brasil)
   const formatadorHora = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' });
   const dataLocalStr = dataJogo.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
 
@@ -91,8 +90,8 @@ export function CardAposta({
       </div>
 
       <div className={styles.matchografia}>
-        {/* Mandante */}
-        <div className={styles.timeBlock}>
+        {/* Mandante - Adicionado o atributo title aqui */}
+        <div className={styles.timeBlock} title={timeCasa}>
           <img src={logoCasa} alt={timeCasa} className={styles.logo} />
           <span className={styles.nomeTime}>{siglaCasa}</span>
         </div>
@@ -100,7 +99,7 @@ export function CardAposta({
         {/* Inputs de Placar */}
         <div className={styles.placarWrapper}>
           <input 
-            title="golscasa"
+            title="Gols do Mandante"
             type="number" 
             min="0"
             value={golsCasa} 
@@ -110,7 +109,7 @@ export function CardAposta({
           />
           <span className={styles.vs}>X</span>
           <input 
-            title="golsvis"
+            title="Gols do Visitante"
             type="number" 
             min="0"
             value={golsVis} 
@@ -120,8 +119,8 @@ export function CardAposta({
           />
         </div>
 
-        {/* Visitante */}
-        <div className={styles.timeBlock}>
+        {/* Visitante - Adicionado o atributo title aqui */}
+        <div className={styles.timeBlock} title={timeVisitante}>
           <img src={logoVisitante} alt={timeVisitante} className={styles.logo} />
           <span className={styles.nomeTime}>{siglaVisitante}</span>
         </div>
