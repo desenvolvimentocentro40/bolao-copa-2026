@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { salvarPalpiteAction } from '@/app/actions/apostas';
-import { obterSugestaoIAAction } from '@/app/actions/ai'; // Importando a nova action da IA
+import { obterSugestaoIAAction } from '@/app/actions/ai';
 import styles from './CardAposta.module.css';
 
 interface CardApostaProps {
@@ -32,9 +32,15 @@ export function CardAposta({
   const [loadingIA, setLoadingIA] = useState(false);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  const encerrado = status !== 'agendado' || new Date() >= new Date(dataHora);
+  // Cálculos de data e hora (Subtraindo 10 minutos)
+  const dataJogo = new Date(dataHora);
+  const dataEncerramento = new Date(dataJogo.getTime() - 10 * 60 * 1000);
+  const encerrado = status !== 'agendado' || new Date() >= dataEncerramento;
 
-  // Função para chamar a IA e preencher os campos automaticamente
+  // Formatação para exibir na tela
+  const formatadorHora = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const dataLocalStr = dataJogo.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+
   async function handleGerarPalpiteIA() {
     setLoadingIA(true);
     setMsg(null);
@@ -73,7 +79,12 @@ export function CardAposta({
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <span>{new Date(dataHora).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.9rem' }}>
+          <span>⚽ Jogo: <strong>{dataLocalStr} às {formatadorHora.format(dataJogo)}</strong></span>
+          <span style={{ color: encerrado ? '#dc3545' : '#e0a800', fontWeight: '500' }}>
+            ⏳ Apostas até: {formatadorHora.format(dataEncerramento)}
+          </span>
+        </div>
         <span className={styles.fase}>{fase}</span>
       </div>
 
@@ -116,7 +127,6 @@ export function CardAposta({
 
       <div className={styles.footer}>
         <div className={styles.actionsGroup}>
-          {/* Novo botão de palpite gerado pela IA */}
           <button
             type="button"
             className={styles.btnIA}

@@ -26,10 +26,12 @@ export async function salvarPalpiteAction(jogoId: number, palpiteCasa: number, p
     
     const jogo = jogos[0];
     const agora = new Date();
-    const dataLimite = new Date(jogo.data_hora.getTime()); // Pode subtrair minutos aqui se quiser travar antes
+    
+    // Subtrai exatamente 10 minutos (10 * 60 * 1000 milissegundos) da hora oficial do jogo
+    const dataLimite = new Date(jogo.data_hora.getTime() - 10 * 60 * 1000);
 
     if (agora >= dataLimite || jogo.status !== 'agendado') {
-      return { success: false, message: 'As apostas para este jogo já estão encerradas!' };
+      return { success: false, message: 'Tempo esgotado! As apostas encerram 10 minutos antes do jogo.' };
     }
 
     // 3. Salvar ou atualizar o palpite usando a restrição UNIQUE do MySQL
