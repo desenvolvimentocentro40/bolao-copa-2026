@@ -32,13 +32,10 @@ export function CardAposta({
   const [loadingIA, setLoadingIA] = useState(false);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // 1. Corrige o fuso horário removendo o 'Z' (UTC) para forçar o horário exato salvo no banco
-  const dataHoraCorrigida = typeof dataHora === 'string' && dataHora.endsWith('Z') 
-    ? dataHora.slice(0, -1) 
-    : dataHora;
-
-  // 2. Cálculos de data e hora (Subtraindo 10 minutos)
-  const dataJogo = new Date(dataHoraCorrigida);
+  // 1. O JavaScript puro já entende o formato que vem do banco graças à nossa config do Docker!
+  const dataJogo = new Date(dataHora);
+  
+  // 2. Cálculos de data e hora (Subtraindo 10 minutos para a guilhotina)
   const dataEncerramento = new Date(dataJogo.getTime() - 10 * 60 * 1000);
   const encerrado = status !== 'agendado' || new Date() >= dataEncerramento;
 
