@@ -5,7 +5,9 @@ import { verifyToken } from '@/lib/auth';
 import { query } from '@/lib/db';
 import { AdminForm } from './AdminForm';
 import { AdminFinalizarJogo } from './AdminFinalizarJogo';
+//import { EdicaoJogoCard } from '@/app/components/EdicaoJogoCard'; // Importe o componente que criamos
 import styles from './admin.module.css';
+import { EdicaoJogoCard } from '@/components/EdicaoJogoCard/EdicaoJogoCard';
 
 // Busca os times para o dropdown de criação
 async function fetchTimes() {
@@ -58,8 +60,30 @@ export default async function AdminPage() {
 
       <hr className={styles.sectionDivider} />
 
-      {/* Seção 2: Encerrar Jogos Pendentes */}
-      <h2 className={styles.sectionTitle}>2. Finalizar Partidas e Calcular Pontos</h2>
+      {/* Nova Seção 2: Editar Horários */}
+      <h2 className={styles.sectionTitle}>2. Alterar Horários dos Jogos</h2>
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+        Ajuste a data e hora de jogos agendados. Isso irá alterar automaticamente a data de encerramento das apostas.
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '2rem' }}>
+        {jogosPendentes.map((jogo) => (
+          <EdicaoJogoCard 
+            key={jogo.id}
+            jogoId={jogo.id}
+            siglaCasa={jogo.sigla_casa}
+            siglaVisitante={jogo.sigla_visitante}
+            dataHoraAtual={jogo.data_hora}
+          />
+        ))}
+        {jogosPendentes.length === 0 && (
+          <p style={{ fontStyle: 'italic', color: '#666' }}>Nenhum jogo pendente para edição.</p>
+        )}
+      </div>
+
+      <hr className={styles.sectionDivider} />
+
+      {/* Seção 3: Encerrar Jogos Pendentes */}
+      <h2 className={styles.sectionTitle}>3. Finalizar Partidas e Calcular Pontos</h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
         Atenção: Ao preencher o placar e clicar em "Encerrar Partida", o sistema irá distribuir os pontos (5, 3, 1 ou 0) para todos os palpites imediatamente.
       </p>

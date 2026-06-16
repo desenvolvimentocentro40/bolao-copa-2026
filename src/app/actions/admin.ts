@@ -51,3 +51,34 @@ export async function criarJogoAction(formData: FormData) {
     return { success: false, message: 'Erro interno ao salvar no banco.' };
   }
 }
+
+export async function atualizarHorarioJogoAction(jogoId: number, novaDataHora: string) {
+  try {
+    // 1. Verificação de Segurança
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth_token')?.value;
+    if (!token) return { success: false, message: 'Usuário não autenticado.' };
+    
+    const usuario = verifyToken(token);
+    if (!usuario || usuario.tipo !== 'admin') {
+      return { success: false, message: 'Acesso negado. Área restrita à diretoria.' };
+    }
+
+    // 2. O input 'datetime-local' do HTML envia no formato "YYYY-MM-DDTHH:mm"
+    // O MySQL prefere "YYYY-MM-DD HH:mm:00". Vamos formatar:
+    const dataFormatada = novaDataHora.replace('T', ' ') + ':00';
+
+    // 3. Atualiza na base de dados
+    await query('UPDATE jogos SET data_hora = ? WHERE id = ?', [dataFormatada, jogoId]);
+
+    // 4. Limpa o cache para que a alteração apareça imediatamente em todo o sistema
+    revalidatePath('/'); // Atualiza a página inicial/dashboard
+    revalidatePath('/apostas'); // Atualiza a tela de apostas
+    revalidatePath('/admin'); // Atualiza a própria página de admin (caso a rota seja esta)
+    
+    return { success: true, message: 'Horário atualizado com sucesso!' };
+  } catch (error) {
+    console.error('Erro ao atualizar horário:', error);
+    return { success: false, message: 'Erro interno ao atualizar horário.' };
+  }
+}
