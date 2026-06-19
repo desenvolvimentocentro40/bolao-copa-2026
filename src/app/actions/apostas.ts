@@ -53,3 +53,54 @@ export async function salvarPalpiteAction(jogoId: number, palpiteCasa: number, p
     return { success: false, message: 'Erro interno ao salvar palpite.' };
   }
 }
+
+export async function obterPalpitesUsuarioAction(usuarioId: number) {
+  try {
+    const sql = `
+      SELECT 
+        j.id AS jogo_id, 
+        j.data_hora, 
+        j.fase, 
+        j.status AS jogo_status,
+        j.gols_casa AS gols_casa_real, 
+        j.gols_visitante AS gols_visitante_real,
+        t1.sigla AS time_casa, 
+        t1.logo_url AS logo_casa, 
+        t1.nome AS nome_casa,
+        t2.sigla AS time_visitante, 
+        t2.logo_url AS logo_visitante, 
+        t2.nome AS nome_visitante,
+        a.palpite_casa, 
+        a.palpite_visitante, 
+        a.pontos_obtidos
+      FROM apostas a
+      JOIN jogos j ON a.jogo_id = j.id
+      JOIN times t1 ON j.time_casa_id = t1.id
+      JOIN times t2 ON j.time_visitante_id = t2.id
+      WHERE a.usuario_id = ?
+      ORDER BY j.data_hora DESC
+    `;
+    const rows = await query<any[]>(sql, [usuarioId]);
+    
+    // Processar para ocultar palpites de jogos que ainda não fecharam aposta
+    const agora = new Date();
+    const processedRows = rows.map(r => {
+      const dataJogo = new Date(r.data_hora);
+      const dataLimite = new Date(dataJogo.getTime() - 10 * 60 * 1000);
+      const encerrado = r.jogo_status !== 'agendado' || agora >= dataLimite;
+      
+      return {
+        ...r,
+        palpite_oculto: !encerrado,
+        palpite_casa: encerrado ? r.palpite_casa : null,
+        palpite_visitante: encerrado ? r.palpite_visitante : null,
+        pontos_obtidos: encerrado ? r.pontos_obtidos : null,
+      };
+    });
+    
+    return { success: true, palpites: processedRows };
+  } catch (error) {
+    console.error('Erro ao obter palpites do usuário:', error);
+    return { success: false, message: 'Erro ao carregar palpites.' };
+  }
+}

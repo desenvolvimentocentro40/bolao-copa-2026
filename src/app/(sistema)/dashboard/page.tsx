@@ -1,4 +1,5 @@
 import { query } from '@/lib/db';
+import { LeaderboardTable } from './LeaderboardTable';
 import styles from './dashboard.module.css';
 
 interface LeaderboardRow {
@@ -31,14 +32,6 @@ async function getLeaderboard(): Promise<LeaderboardRow[]> {
 export default async function DashboardPage() {
   const ranking = await getLeaderboard();
 
-  // Função auxiliar para definir a classe CSS de destaque da posição
-  const getPosClass = (index: number) => {
-    if (index === 0) return styles.primeiro;
-    if (index === 1) return styles.segundo;
-    if (index === 2) return styles.terceiro;
-    return '';
-  };
-
   return (
     <div className={styles.container}>
       {/* Card de Boas-vindas */}
@@ -50,50 +43,7 @@ export default async function DashboardPage() {
       {/* Seção da Tabela de Classificação */}
       <section className={styles.leaderboardSection}>
         <h2 className={styles.sectionTitle}>🏆 Classificação Geral</h2>
-        
-        <div className={styles.tableWrapper}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th style={{ width: '80px' }}>Pos</th>
-                <th>Participante</th>
-                <th>Setor</th>
-                <th style={{ textAlign: 'right', width: '120px' }}>Pontos</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ranking.map((player, index) => (
-                <tr key={player.id} className={styles.row}>
-                  <td>
-                    <span className={`${styles.posicao} ${getPosClass(index)}`}>
-                      {index + 1}º
-                    </span>
-                  </td>
-                  <td>
-                    <span className={styles.nomeUsuario}>{player.nome}</span>
-                    {player.tipo === 'ia' && (
-                      <span className={styles.iaBadge}>Inteligência Artificial</span>
-                    )}
-                  </td>
-                  <td>
-                    <span className={styles.setorBadge}>{player.setor}</span>
-                  </td>
-                  <td style={{ textAlign: 'right' }}>
-                    <span className={styles.pontos}>{player.total_pontos} pts</span>
-                  </td>
-                </tr>
-              ))}
-
-              {ranking.length === 0 && (
-                <tr>
-                  <td colSpan={4} style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
-                    Nenhum jogador pontuou ainda. A Copa está prestes a começar!
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+        <LeaderboardTable ranking={ranking} />
       </section>
     </div>
   );
